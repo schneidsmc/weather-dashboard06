@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Michroma&family=Rouge+Script&display=swap');
+
+:root {
+--frozen: #6610F2;
+--cool: #1A8FE3;
+--warm: #FCDC4D;
+--hot: #EF271B;
+--green: #0C7C59;
+--blau: #5296A5;
+--alles: #1B4079;
+}
+
+  
+* {
+    box-sizing: border-box;
+    
+}
+
