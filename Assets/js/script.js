@@ -17,7 +17,6 @@ console.log(searchInputVal)
     //Set the search params in the URL (i.e. `?q=london&format=photo`)
   var queryString = './index.html?q=' + searchInputVal;
 console.log(queryString)
-  location.assign(queryString);
 }
 
 searchEl.addEventListener('click', btn);
