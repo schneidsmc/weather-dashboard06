@@ -13,6 +13,9 @@
   
 * {
     box-sizing: border-box;
-    
+    font-family: "Michroma";
 }
 
+.hero {
+    background-color: #1B4079;
+}
