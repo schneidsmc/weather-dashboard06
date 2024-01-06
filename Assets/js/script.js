@@ -16,6 +16,15 @@ console.log(searchInputVal)
         console.error('You need a search input value!');
         return;
     }
+
+    localStorage.setItem('searchInputVal', searchInputVal);
+
+    var previousInputs = JSON.parse(localStorage.getItem('searchInputs')) || [];
+
+    previousInputs.push(searchInputVal);
+
+    localStorage.setItem('searchInputs', JSON.stringify(previousInputs));
+
   searchApi(searchInputVal);
 
 }
@@ -64,8 +73,6 @@ console.log(searchInputVal)
       // printData(tempLoc);
 
       })
-
-
       .catch(function (error) {
         console.error(error);
       });
