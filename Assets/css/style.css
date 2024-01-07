@@ -8,6 +8,7 @@
 --green: #0C7C59;
 --blau: #5296A5;
 --alles: #1B4079;
+--white: #FFFFFF;
 }
 
   
@@ -56,6 +57,22 @@ main {
 }
 .card-text{
     font-size: 15px;
+}
+
+.btn {
+    font-size: 1.3rem;
+    display: inline;
+    margin: 5px 0;
+    border-radius: var(--border-radius);
+    box-shadow: 3px 3px var(--blau);
+    transform: translate(-1px, -1px);
+}
+  
+.btn:hover {
+    transform: translate(0, 0);
+    background-color: var(--alles);
+    color: var(--white);
+    box-shadow: 2px 2px var(--frozen);
 }
 @media (max-width: 576px) {
     .custom-container {

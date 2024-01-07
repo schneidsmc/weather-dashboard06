@@ -2,10 +2,6 @@ var searchEl = document.querySelector('#searchBtn');
 var titleEl = document.querySelector('.city');
 var fiveDay = document.querySelector('.five-day');
 var currentContainer = document.querySelector('.currentContainer')
-// var currentCity = document.querySelector('#currentCity');
-// var currentTemp = document.querySelector('#currentTemp');
-// var currentHumidity = document.querySelector('#currentHumidity');
-// var currentWind = document.querySelector('#currentWind');
 
 
 // Event Listening to get the Input Value
@@ -86,16 +82,12 @@ console.log(searchInputVal)
         fiveResults(weatherData);
 
       })
-
-    
       })
       .catch(function (error) {
         console.error(error);
       });
     }
     
-
-
 
 function printResults(weatherData) {
   var currentContainer = document.querySelector('.currentContainer');
@@ -107,7 +99,7 @@ var humidity = weatherData.list[0].main.humidity;
 var wind = weatherData.list[0].wind.speed;
 var name = weatherData.city.name
 var iconCode = weatherData.list[0].weather[0].icon;
-var iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
+var iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
 var card = document.createElement('div');
       card.classList.add('card', 'p-2');
@@ -125,31 +117,24 @@ var cardContent = `
 
 }
 
-// currentCity.innerHTML = name;
-// currentTemp.innerHTML = 'Temp: ' + temp + ' F';
-// currentHumidity.innerHTML = 'Humidity: ' + humidity + '%';
-// currentWind.innerHTML = 'Wind: ' + wind;
-
-
 
 function fiveResults(weatherData) {
   var fiveDayContainer = document.querySelector('.five-day');
-  fiveDayContainer.innerHTML = ''; // Clear previous content
+  fiveDayContainer.innerHTML = ''; 
   
   for (var i = 0; i < 5; i++) {
       var card = document.createElement('div');
       card.classList.add('card', 'p-2');
 
       var date = new Date(weatherData.list[i * 8].dt * 1000);
-      var dateString = (date.getMonth() + 1).toString().padStart(2, '0') + '/' +
-                         date.getDate().toString().padStart(2, '0');
+      var dateString = (date.getMonth() + 1).toString().padStart(2, '0') + '/' + date.getDate().toString().padStart(2, '0');
 
       var temp = weatherData.list[i * 8].main.temp;
       var humidity = weatherData.list[i * 8].main.humidity;
       var wind = weatherData.list[i * 8].wind.speed;
       var iconCode = weatherData.list[i * 8].weather[0].icon;
 
-      var iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
+      var iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
       var cardContent = `
           <h5 class="card-title">${dateString}</h5>
