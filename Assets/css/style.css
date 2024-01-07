@@ -19,3 +19,40 @@
 .hero {
     background-color: #1B4079;
 }
+
+body {
+    height: 100vh;
+    font-family: 'Michroma';
+    line-height: 1.5;
+    font-size: 16px;
+}
+  
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.25;
+}
+  
+main {
+    margin-left: 40px auto;
+    width: 94%;
+    min-height:100%;
+    overflow: auto;
+}
+
+.five-day {
+    display:flex;
+}
+.card-header{
+    font-size: 25px;
+}
+.custom-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 576px) {
+    .custom-container {
+        flex-direction: column;
+    }
+}
