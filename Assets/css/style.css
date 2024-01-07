@@ -64,7 +64,7 @@ main {
     display: inline;
     margin: 5px 0;
     border-radius: var(--border-radius);
-    box-shadow: 3px 3px var(--blau);
+    box-shadow: 3px 3px 3px 3px var(--blau);
     transform: translate(-1px, -1px);
 }
   

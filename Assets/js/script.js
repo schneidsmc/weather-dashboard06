@@ -122,17 +122,17 @@ function fiveResults(weatherData) {
   var fiveDayContainer = document.querySelector('.five-day');
   fiveDayContainer.innerHTML = ''; 
   
-  for (var i = 0; i < 5; i++) {
+  for (var i = 1; i < 6; i++) {
       var card = document.createElement('div');
       card.classList.add('card', 'p-2');
 
-      var date = new Date(weatherData.list[i * 8].dt * 1000);
-      var dateString = (date.getMonth() + 1).toString().padStart(2, '0') + '/' + date.getDate().toString().padStart(2, '0');
+      var date = new Date(weatherData.list[i * 7].dt * 1000);
+      var dateString = (date.getMonth() + 1).toString().padStart(1, '0') + '/' + date.getDate().toString().padStart(1, '0');
 
-      var temp = weatherData.list[i * 8].main.temp;
-      var humidity = weatherData.list[i * 8].main.humidity;
-      var wind = weatherData.list[i * 8].wind.speed;
-      var iconCode = weatherData.list[i * 8].weather[0].icon;
+      var temp = weatherData.list[i * 7].main.temp;
+      var humidity = weatherData.list[i * 7].main.humidity;
+      var wind = weatherData.list[i * 7].wind.speed;
+      var iconCode = weatherData.list[i * 7].weather[0].icon;
 
       var iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
