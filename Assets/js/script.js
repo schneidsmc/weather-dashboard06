@@ -1,10 +1,11 @@
 var searchEl = document.querySelector('#searchBtn');
 var titleEl = document.querySelector('.city');
 var fiveDay = document.querySelector('.five-day');
-var currentCity = document.querySelector('#currentCity');
-var currentTemp = document.querySelector('#currentTemp');
-var currentHumidity = document.querySelector('#currentHumidity');
-var currentWind = document.querySelector('#currentWind');
+var currentContainer = document.querySelector('.currentContainer')
+// var currentCity = document.querySelector('#currentCity');
+// var currentTemp = document.querySelector('#currentTemp');
+// var currentHumidity = document.querySelector('#currentHumidity');
+// var currentWind = document.querySelector('#currentWind');
 
 
 // Event Listening to get the Input Value
@@ -92,58 +93,73 @@ console.log(searchInputVal)
         console.error(error);
       });
     }
+    
+
+
 
 function printResults(weatherData) {
+  var currentContainer = document.querySelector('.currentContainer');
+  currentContainer.innerHTML = ''; 
+
+
 var temp = weatherData.list[0].main.temp;
 var humidity = weatherData.list[0].main.humidity;
 var wind = weatherData.list[0].wind.speed;
 var name = weatherData.city.name
+var iconCode = weatherData.list[0].weather[0].icon;
+var iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
 
-currentCity.innerHTML = name;
-currentTemp.innerHTML = 'Temp: ' + temp + ' F';
-currentHumidity.innerHTML = 'Humidity: ' + humidity + '%';
-currentWind.innerHTML = 'Wind: ' + wind;
+var card = document.createElement('div');
+      card.classList.add('card', 'p-2');
+
+var cardContent = `
+          <h2 class="card-title">${name}</h2>
+          <img class="weatherIcon" src="${iconUrl}" alt="Weather Icon" />
+          <p class="card-text">Temp: ${temp} F</p>
+          <p class="card-text">Humidity: ${humidity}%</p>
+          <p class="card-text">Wind: ${wind}</p>
+      `;
+
+    card.innerHTML = cardContent;
+      currentContainer.appendChild(card);
 
 }
+
+// currentCity.innerHTML = name;
+// currentTemp.innerHTML = 'Temp: ' + temp + ' F';
+// currentHumidity.innerHTML = 'Humidity: ' + humidity + '%';
+// currentWind.innerHTML = 'Wind: ' + wind;
+
+
 
 function fiveResults(weatherData) {
+  var fiveDayContainer = document.querySelector('.five-day');
+  fiveDayContainer.innerHTML = ''; // Clear previous content
+  
+  for (var i = 0; i < 5; i++) {
+      var card = document.createElement('div');
+      card.classList.add('card', 'p-2');
 
-  var resultCard = document.createElement('div');
-  resultCard.classList.add('card', 'bg-light', 'text-dark', 'mb-3', 'p-3');
+      var date = new Date(weatherData.list[i * 8].dt * 1000);
+      var dateString = (date.getMonth() + 1).toString().padStart(2, '0') + '/' +
+                         date.getDate().toString().padStart(2, '0');
 
-  var resultBody = document.createElement('div');
-  resultBody.classList.add('card-body');
-  resultCard.append(resultBody);
+      var temp = weatherData.list[i * 8].main.temp;
+      var humidity = weatherData.list[i * 8].main.humidity;
+      var wind = weatherData.list[i * 8].wind.speed;
+      var iconCode = weatherData.list[i * 8].weather[0].icon;
 
-  var titleEl = document.createElement('h3');
-  titleEl.textContent = resultObj.title;
+      var iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
 
-  var bodyContentEl = document.createElement('p');
-  bodyContentEl.innerHTML =
-    '<strong>Date:</strong> ' + resultObj.date + '<br/>';
+      var cardContent = `
+          <h5 class="card-title">${dateString}</h5>
+          <img src="${iconUrl}" alt="Weather Icon" />
+          <p class="card-text">Temp: ${temp} F</p>
+          <p class="card-text">Humidity: ${humidity}%</p>
+          <p class="card-text">Wind: ${wind}</p>
+      `;
 
-  if (resultObj.subject) {
-    bodyContentEl.innerHTML +=
-      '<strong>Subjects:</strong> ' + resultObj.subject.join(', ') + '<br/>';
-  } else {
-    bodyContentEl.innerHTML +=
-      '<strong>Subjects:</strong> No subject for this entry.';
+      card.innerHTML = cardContent;
+      fiveDayContainer.appendChild(card);
   }
-
-  if (resultObj.description) {
-    bodyContentEl.innerHTML +=
-      '<strong>Description:</strong> ' + resultObj.description[0];
-  } else {
-    bodyContentEl.innerHTML +=
-      '<strong>Description:</strong>  No description for this entry.';
-  }
-
-  resultBody.append(titleEl, bodyContentEl);
-
-  resultContentEl.append(resultCard);
 }
-
-
-
-
-
