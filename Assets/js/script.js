@@ -4,7 +4,6 @@ var fiveDay = document.querySelector('.five-day');
 var currentContainer = document.querySelector('.currentContainer')
 var clearBtn = document.querySelector('.clear');
 
-// Event Listening to get the Input Value
 searchEl.addEventListener('click', btn);
 
 function btn (event) {
@@ -13,7 +12,8 @@ function btn (event) {
     var searchInputVal = document.querySelector('#myInput').value;
     
 console.log(searchInputVal)
-    if (!searchInputVal) {
+if (!searchInputVal) {
+  alert('Unrecognizable Input');
         console.error('You need a search input value!');
         return;
     }
@@ -26,8 +26,8 @@ console.log(searchInputVal)
 
     localStorage.setItem('searchInputs', JSON.stringify(previousInputs));
 
-    if (previousInputs.length > 8) {
-      previousInputs.shift(); // Remove the oldest search
+    if (previousInputs.length > 10) {
+      previousInputs.shift(); 
   }
 
   loadSearchHistory();
@@ -80,6 +80,7 @@ console.log(searchInputVal)
         console.log("Wind:", weatherData.list[0].wind.speed);
         console.log(weatherData.list[0].weather[0].icon)
       
+        
         printResults(weatherData);
 
         fiveResults(weatherData);
@@ -153,7 +154,6 @@ function fiveResults(weatherData) {
 }
 
 
-// Function to load search history and display links
 function loadSearchHistory() {
     var searchHistoryContainer = document.querySelector('.searchHistory');
     searchHistoryContainer.innerHTML = '';
@@ -168,7 +168,7 @@ function loadSearchHistory() {
         button.classList.add('btn');
 
         button.addEventListener('click', function () {
-            // Handle the click event to show current weather and forecast
+          
             var clickedSearch = this.textContent;
             searchApi(clickedSearch);
         });
