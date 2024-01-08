@@ -2,7 +2,7 @@ var searchEl = document.querySelector('#searchBtn');
 var titleEl = document.querySelector('.city');
 var fiveDay = document.querySelector('.five-day');
 var currentContainer = document.querySelector('.currentContainer')
-
+var clearBtn = document.querySelector('.clear');
 
 // Event Listening to get the Input Value
 searchEl.addEventListener('click', btn);
@@ -26,8 +26,11 @@ console.log(searchInputVal)
 
     localStorage.setItem('searchInputs', JSON.stringify(previousInputs));
 
+    if (previousInputs.length > 8) {
+      previousInputs.shift(); // Remove the oldest search
+  }
 
-
+  loadSearchHistory();
   searchApi(searchInputVal);
 
 }
@@ -148,3 +151,40 @@ function fiveResults(weatherData) {
       fiveDayContainer.appendChild(card);
   }
 }
+
+
+// Function to load search history and display links
+function loadSearchHistory() {
+    var searchHistoryContainer = document.querySelector('.searchHistory');
+    searchHistoryContainer.innerHTML = '';
+
+    var recentSearches = JSON.parse(localStorage.getItem('searchInputs')) || [];
+
+    for (var i = 0; i < recentSearches.length; i++) {
+        var button = document.createElement('button');
+     
+        button.textContent = recentSearches[i];
+
+        button.classList.add('btn');
+
+        button.addEventListener('click', function () {
+            // Handle the click event to show current weather and forecast
+            var clickedSearch = this.textContent;
+            searchApi(clickedSearch);
+        });
+
+        searchHistoryContainer.appendChild(button);
+        
+    }
+}
+
+  var clearBtn = document.querySelector('.clear')
+  var searchList = document.querySelector('.searchHistory')
+  clearBtn.addEventListener('click', function clearLocalStorage() {
+    localStorage.clear();
+    clearList()
+  })
+  function clearList(){
+    searchList.innerHTML = ('');
+  }
+
